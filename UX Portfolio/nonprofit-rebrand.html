@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holy Cross — Case Study | Alphonse Riang</title>
+<meta name="description" content="Unifying a global nonprofit across 17 countries. Brand systems, organizational design, and a rollout built for adoption.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  /* ── PALETTE
+     Primary:  Royal blue  #0047BB — the Holy Cross brand primary
+     Secondary: Bronze     #89764B — the Holy Cross brand secondary
+     Hero bg:  True black  #000000 — institutional weight, gravitas
+     Page bg:  Very light blue-white — cooler than sand/cream, distinct from the other two
+  ──────────────────────────────────────────────────────── */
+  :root {
+    --blue:      #0047BB;
+    --blue-dk:   #003591;
+    --blue-lt:   #1A5FD4;
+    --blue-tint: #B8CCF0;
+    --blue-pale: #EEF3FC;
+
+    --bronze:    #89764B;
+    --bronze-lt: #A08E60;
+    --bronze-pale: #F5F0E6;
+
+    --ink:       #0D0D0E;
+    --body:      #2A2A2E;
+    --mid:       #52525A;
+    --muted:     #82828C;
+    --rule:      #DDE0E8;
+    --stone:     #E8EAF0;
+    --bg:        #F4F5F8;   /* cool off-white — distinct from warm sand */
+    --white:     #FFFFFF;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(244,245,248,0.93);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem; color: var(--ink);
+    text-decoration: none; letter-spacing: 0.01em;
+  }
+  .nav-back {
+    font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--blue); }
+
+  /* ── HERO — light, blue on type ── */
+  .hero {
+    background: var(--bg);
+    padding: 5rem 4rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-inner { max-width: 1080px; margin: 0 auto; }
+  .hero-rule { width: 48px; height: 3px; background: var(--blue); margin-bottom: 2.5rem; }
+  .hero-meta {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta-item {
+    font-size: 0.67rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .hero-meta-item strong {
+    display: block; color: var(--body);
+    font-weight: 500; margin-top: 0.15rem;
+    font-size: 0.8rem; text-transform: none; letter-spacing: 0.02em;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 400; margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+    color: var(--ink); line-height: 1.05;
+    letter-spacing: -0.02em; margin-bottom: 1rem;
+  }
+  .hero-title span { color: var(--blue); }
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--mid);
+    line-height: 1.5; margin-bottom: 1.5rem;
+    max-width: 520px;
+  }
+  .hero-tagline {
+    font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--bronze);
+    font-weight: 500; margin-bottom: 4.5rem;
+  }
+  .hero-img-block {
+    background: var(--stone);
+    border: 1px solid var(--rule);
+    border-radius: 10px 10px 0 0;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.6rem; padding: 3rem 2rem; text-align: center;
+  }
+
+  /* ── IMAGE BLOCKS ── */
+  .img-tag {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    border-radius: 3px; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .real-tag  { background: rgba(0,71,187,0.15);  color: var(--blue-lt); }
+  .mock-tag  { background: rgba(13,13,14,0.07);  color: var(--mid); }
+  .dark-tag  { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.38); }
+
+  .img-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 10px; min-height: 300px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem; padding: 2.5rem 2rem; text-align: center;
+  }
+  .img-block.light {
+    background: rgba(13,13,14,0.03);
+    border-color: rgba(13,13,14,0.1);
+  }
+  .img-block.real {
+    background: rgba(0,71,187,0.04);
+    border-color: rgba(0,71,187,0.18);
+  }
+  .img-block.short { min-height: 200px; }
+  .img-block.tall  { min-height: 420px; }
+
+  .img-num  { font-family: 'DM Serif Display', serif; font-size: 0.88rem; color: rgba(255,255,255,0.18); letter-spacing: 0.1em; }
+  .img-name { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.5); }
+  .img-desc { font-size: 0.72rem; color: rgba(255,255,255,0.22); max-width: 400px; line-height: 1.55; }
+  .img-num  { color: var(--muted); }
+  .img-name { color: var(--ink); font-weight: 500; }
+  .img-desc { color: var(--mid); }
+  .img-block.real  .img-num  { color: var(--blue); opacity: 0.7; }
+
+  /* ── LAYOUT ── */
+  .container      { max-width: 820px;  margin: 0 auto; padding: 0 2.5rem; }
+  .container-wide { max-width: 1080px; margin: 0 auto; padding: 0 2.5rem; }
+  section { padding: 5rem 0; }
+  hr { border: none; border-top: 1px solid var(--rule); }
+
+  /* ── LABEL ── */
+  .label {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; font-weight: 500;
+    color: var(--blue); margin-bottom: 1.2rem;
+  }
+  .label::before { content: ''; width: 18px; height: 1px; background: var(--blue); opacity: 0.4; }
+
+  /* ── TYPE ── */
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+    font-weight: 400; letter-spacing: -0.01em;
+    line-height: 1.12; color: var(--ink); margin-bottom: 1.4rem;
+  }
+  h3 {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 0.5rem; margin-top: 1.75rem;
+  }
+  p {
+    font-size: 1rem; color: var(--body);
+    margin-bottom: 1.15rem; max-width: 620px;
+    line-height: 1.8; font-weight: 400;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 10px;
+    overflow: hidden; margin: 2.5rem 0;
+  }
+  .stat { background: var(--white); padding: 1.6rem 1.4rem; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: var(--blue);
+    line-height: 1; margin-bottom: 0.35rem;
+  }
+  .stat p { font-size: 0.82rem; color: var(--mid); line-height: 1.4; max-width: none; margin: 0; font-weight: 400; }
+
+  /* ── USER CARDS ── */
+  .user-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0; }
+  .user-card {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.75rem;
+    border-left: 3px solid var(--blue);
+  }
+  .user-card.secondary { border-left-color: var(--bronze); }
+  .user-card h4 {
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--blue); margin-bottom: 0.2rem;
+  }
+  .user-card.secondary h4 { color: var(--bronze); }
+  .user-card .user-type { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; font-weight: 400; }
+  .user-card p { font-size: 0.92rem; color: var(--body); margin: 0; max-width: none; line-height: 1.65; }
+  .user-need {
+    font-size: 0.8rem; font-style: italic;
+    color: var(--mid); border-top: 1px solid var(--rule);
+    margin-top: 0.85rem; padding-top: 0.85rem; font-weight: 400;
+  }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    border-left: 2px solid var(--blue);
+    padding: 0.5rem 0 0.5rem 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .pullquote p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--ink); line-height: 1.5;
+    max-width: 580px; margin: 0; font-weight: 400;
+  }
+
+  /* ── APPROACH LIST ── */
+  .approach-list { margin: 2rem 0; display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+  .approach-item { background: var(--white); padding: 1.5rem 1.75rem; display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; align-items: start; }
+  .approach-num { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--blue); padding-top: 0.1rem; }
+  .approach-body h4 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.4rem; }
+  .approach-body p  { font-size: 0.92rem; color: var(--body); margin: 0; max-width: none; line-height: 1.65; font-weight: 400; }
+
+  /* ── BRAND SECTION (cool bg) ── */
+  .brand-section { background: var(--blue-pale); }
+  .brand-section .label { color: var(--blue); }
+  .brand-section .label::before { background: var(--blue); }
+
+  /* ── OUTCOME CARDS ── */
+  .outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0; }
+  .outcome-card { background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 1.6rem; border-top: 3px solid var(--blue); }
+  .outcome-card.bronze-top { border-top-color: var(--bronze); }
+  .outcome-card h4 { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 0.5rem; }
+  .outcome-card.bronze-top h4 { color: var(--bronze); }
+  .outcome-card p  { font-size: 0.92rem; color: var(--body); margin: 0; max-width: none; line-height: 1.65; font-weight: 400; }
+
+  /* ── HIGHLIGHT CALLOUT ── */
+  .callout {
+    background: var(--blue-pale); border: 1px solid rgba(0,71,187,0.18);
+    border-left: 3px solid var(--blue); border-radius: 8px;
+    padding: 1.5rem 1.75rem; margin: 2.5rem 0;
+  }
+  .callout-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--blue); margin-bottom: 0.5rem; }
+  .callout p { font-size: 0.93rem; color: var(--body); margin: 0; max-width: none; font-weight: 400; }
+
+  /* ── METRIC HIGHLIGHT ── */
+  .metric-row { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; }
+  .metric {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    flex: 1; min-width: 160px;
+  }
+  .metric-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--blue); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .metric p { font-size: 0.82rem; color: var(--mid); margin: 0; max-width: none; font-weight: 400; line-height: 1.4; }
+
+  /* ── REFLECTION ── */
+  .reflection-block {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 12px; padding: 2.5rem; margin-top: 2rem;
+  }
+  .reflection-block p { max-width: none; }
+
+  /* ── NEXT WORK ── */
+  .next-work { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+  .next-card {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.75rem;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .next-card:hover { border-color: var(--blue); box-shadow: 0 2px 12px rgba(0,71,187,0.08); }
+  .next-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .next-name  { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); line-height: 1.2; }
+  .next-desc  { font-size: 0.85rem; color: var(--mid); line-height: 1.55; font-weight: 400; }
+  .next-arrow { font-size: 0.85rem; color: var(--blue); margin-top: auto; padding-top: 0.75rem; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--blue-dk); padding: 2.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: rgba(255,255,255,0.6); }
+  .footer-link { font-size: 0.75rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+  .footer-link:hover { color: rgba(255,255,255,0.85); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 3.5rem 1.5rem 0; }
+    .container, .container-wide { padding: 0 1.5rem; }
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .user-cards, .outcomes, .next-work { grid-template-columns: 1fr; }
+    .site-footer { flex-direction: column; gap: 1.5rem; padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Alphonse Riang</a>
+  <a class="nav-back" href="index.html">← All work</a>
+</nav>
+
+<!-- HERO — light -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-rule"></div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Role <strong>Brand Project Lead &amp; Sole Coordinator</strong></div>
+      <div class="hero-meta-item">Scope <strong>17 countries, 4 continents</strong></div>
+      <div class="hero-meta-item">Timeline <strong>Multi-year, 2015–2023</strong></div>
+      <div class="hero-meta-item">Org type <strong>International nonprofit</strong></div>
+    </div>
+    <div class="hero-eyebrow">UX Case Study — Brand Systems &amp; Organizational Design</div>
+    <h1 class="hero-title"><span>One Mission.</span><br>Seventeen Countries.</h1>
+    <p class="hero-subtitle">Unifying a fragmented global nonprofit around a single identity — and designing a rollout that the people meant to use it actually adopted.</p>
+    <div class="hero-tagline">A well-designed system fails if people don't feel ownership over it.</div>
+  </div>
+  <div class="hero-img-block container-wide" style="margin-top:4rem;">
+    <span class="img-tag real-tag">Real asset — use brand imagery</span>
+    <div class="img-num">IMAGE 01</div>
+    <div class="img-name">Hero — Unified Brand Identity System</div>
+    <div class="img-desc">HCFM unified mark.</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="container">
+    <div class="label">Problem</div>
+    <h2>The Brand Confusion Was Costing Real Donors.</h2>
+    <p>Holy Cross Family Ministries grew out of the work of one priest whose mission expanded across Hollywood media, global prayer campaigns, and outreach on four continents. Each branch developed independently — its own name, its own logo, its own audience. After his passing, the organization was absorbed under a broader umbrella with nothing connecting the pieces visually.</p>
+    <p>Donors landing on one website had no idea three others existed. Supporters familiar with one branch couldn't find where to give to the whole. The fragmented identity wasn't a design problem to be solved aesthetically. It was causing real drop-off at the point where people were trying to engage.</p>
+
+    <div class="pullquote">
+      <p>"This wasn't a visual design problem. It was a trust and comprehension problem — and it was costing the organization real donors and real engagement."</p>
+    </div>
+  </div>
+
+  <div class="container-wide" style="margin-top:1rem;">
+    <div class="img-block real tall">
+      <span class="img-tag real-tag">Real asset — use existing materials</span>
+      <div class="img-num">IMAGE 02</div>
+      <div class="img-name">Before — Fragmented Identity</div>
+      <div class="img-desc">sub-organization logos - before/after.</div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:2rem;">
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <p>separate sub-organizations, each with its own name, logo, and audience</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">17</div>
+        <p>country offices that needed to adopt and maintain the new identity</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <p>continents — from Latin America to Sub-Saharan Africa to South Asia</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8 yrs</div>
+        <p>of coordination from early groundwork to global rollout completion</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- USERS -->
+<section>
+  <div class="container">
+    <div class="label">Users</div>
+    <h2>Two Audiences with Different Relationships to the Brand.</h2>
+    <p>Designing for both required holding two completely different needs simultaneously — and making sure the system worked for the people least likely to use it correctly.</p>
+
+    <div class="user-cards">
+      <div class="user-card">
+        <h4>External</h4>
+        <div class="user-type">Donors, supporters, event attendees</div>
+        <p>Had an emotional connection to one part of the organization but no picture of the whole. Giving decisions were being made (or abandoned) with incomplete information. A fragmented brand made trust harder to earn and harder to keep.</p>
+        <div class="user-need">"Who is this, and where does my money actually go?"</div>
+      </div>
+      <div class="user-card secondary">
+        <h4>Internal</h4>
+        <div class="user-type">Staff across 17 country offices</div>
+        <p>Ranged from full marketing teams in Mexico to school administrators in India to small field offices in Africa with no dedicated communications support. Many worked in languages other than English. For some, brand compliance sat well below direct service delivery on the list of priorities — and that was reasonable.</p>
+        <div class="user-need">"What do I actually need to do, and how do I do it with what I have?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- APPROACH -->
+<section>
+  <div class="container">
+    <div class="label">Approach</div>
+    <h2>Years of Groundwork Before a Single Logo Changed.</h2>
+    <p>The project didn't start with a brief. It started with building the case internally over several years. Leadership was protective of the founder's legacy and wary of anything that looked like erasure. Getting approval required reframing the rebrand as restoration, not replacement — this was about making the mission legible, not retiring it.</p>
+    <p>Once underway, the project nearly stalled when each sub-organization pushed for their identity to take precedence in the new system. Rather than try to satisfy everyone, I brought a clear recommendation directly to the president: one mark, one story, everything else in support of that. His sign-off cleared the path.</p>
+  </div>
+
+  <div class="container-wide" style="margin-top:2rem;">
+    <div class="approach-list">
+      <div class="approach-item">
+        <div class="approach-num">01</div>
+        <div class="approach-body">
+          <h4>Agency Selection</h4>
+          <p>Chose a partner with prior faith-based experience. The religious and cultural sensitivity of the work made that non-negotiable, not just preferable. An agency that didn't understand the mission context would have produced technically correct work that felt wrong to the people it was for.</p>
+        </div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">02</div>
+        <div class="approach-body">
+          <h4>Guidelines Built for Real Adoption</h4>
+          <p>Online and offline versions for regions with limited connectivity. A full Spanish-language edition. Icon-led do/don't examples for non-designer audiences. Flexible rules for offices like India with structurally distinct operations. The guidelines were designed for the people least likely to read them — because those were the people who needed them most.</p>
+        </div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">03</div>
+        <div class="approach-body">
+          <h4>Rollout Designed Around People</h4>
+          <p>Physical brand kits mailed to all 17 countries before launch. Live Zoom sessions by time zone, recorded with subtitles for others. A full Spanish-language live session for Latin America. The president led the launch personally — which was the most important decision in the rollout. Brand adoption follows leadership signals, not documentation.</p>
+        </div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">04</div>
+        <div class="approach-body">
+          <h4>Onboarding Built to Last</h4>
+          <p>A permanent SharePoint section with brand walkthrough and welcome message, later adopted by HR as part of standard global new-hire orientation. The brand system wasn't just launched — it was embedded into the organization's operating rhythm so it didn't depend on any one person to maintain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-wide" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+    <div class="img-block real tall">
+      <span class="img-tag real-tag">Real asset</span>
+      <div class="img-num">IMAGE 03</div>
+      <div class="img-name">Brand Guidelines — Key Spreads</div>
+      <div class="img-desc">brand guidelines: the primary mark usage, color system, and one do/don't example page.</div>
+    </div>
+    <div class="img-block real tall">
+      <span class="img-tag real-tag">Real asset — photograph if available</span>
+      <div class="img-num">IMAGE 04</div>
+      <div class="img-name">Physical Brand Kit</div>
+      <div class="img-desc">physical brand kit mailed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND SECTION -->
+<section class="brand-section">
+  <div class="container" style="padding-top:5rem; padding-bottom:5rem;">
+    <div class="label">Identity System</div>
+    <h2>One Mark. Everything Else in Support of That.</h2>
+    <p>The unified identity had to work across print, digital, signage, apparel, and official communications — in regions where production quality varied significantly. The system was built for flexibility within constraint: one primary mark, clear usage rules, and enough structure that offices with no design support could still apply it correctly.</p>
+    <p>Royal blue anchors the palette — institutional, trustworthy, recognizable across cultures. Bronze provides warmth and reflects the organization's history. Black grounds everything for formal and official contexts. The mark had to work on a banner in Mexico, a letterhead in India, and a digital campaign in the US at the same time.</p>
+  </div>
+
+  <div class="container-wide" style="padding-bottom:5rem;">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+      <div class="img-block real tall" style="border-radius:10px;">
+        <span class="img-tag real-tag">Real asset</span>
+        <div class="img-num">IMAGE 05</div>
+        <div class="img-name">Unified Mark — Primary</div>
+        <div class="img-desc">The Holy Cross Family Ministries unified logo.</div>
+      </div>
+      <div class="img-block real tall" style="border-radius:10px;">
+        <span class="img-tag real-tag">Real asset</span>
+        <div class="img-num">IMAGE 06</div>
+        <div class="img-name">Color &amp; Type System</div>
+        <div class="img-desc">The three-color palette Paired with the brand typeface.</div>
+      </div>
+      <div class="img-block real tall" style="border-radius:10px;">
+        <span class="img-tag real-tag">Real asset — photograph</span>
+        <div class="img-num">IMAGE 07</div>
+        <div class="img-name">Identity in the World</div>
+        <div class="img-desc">The mark in actual use.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section>
+  <div class="container">
+    <div class="label">Outcomes</div>
+    <h2>What Actually Changed.</h2>
+
+    <div class="metric-row">
+      <div class="metric">
+        <div class="metric-val">40%</div>
+        <p>improvement in internal workflow efficiency through DAM system introduced during the project</p>
+      </div>
+      <div class="metric">
+        <div class="metric-val">17</div>
+        <p>offices across four continents now operating under one unified visual identity</p>
+      </div>
+      <div class="metric">
+        <div class="metric-val">1</div>
+        <p>new Office of Advancement established post-rebrand, replacing a general Development department</p>
+      </div>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcome-card">
+        <h4>Organizational Impact</h4>
+        <p>The organization established a dedicated Office of Advancement post-rebrand. A clearer brand story made it possible to speak to major donors with a coherent narrative about where contributions went — which wasn't possible when four sub-organizations were competing for the same donor's attention.</p>
+      </div>
+      <div class="outcome-card">
+        <h4>Global Consistency</h4>
+        <p>All 17 offices across four continents now operate under one visual identity. The unifying mark appears on apparel, signage, and printed materials in regions that previously had no visual connection to each other.</p>
+      </div>
+      <div class="outcome-card bronze-top">
+        <h4>Onboarding as Infrastructure</h4>
+        <p>The SharePoint brand onboarding section was adopted by HR as part of standard global new-hire orientation. What started as a brand rollout resource became a permanent piece of how the organization brings new people in.</p>
+      </div>
+      <div class="outcome-card bronze-top">
+        <h4>Where It Falls Short</h4>
+        <p>Brand compliance is still uneven in under-resourced regions. In retrospect, designated regional contacts with ready-made templates would have been more effective than training alone. That's the honest limitation — and the clearest direction for the next phase.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Spanish-language rollout</div>
+      <p>A full Spanish-language edition of the brand guidelines was produced and a dedicated live rollout session was held for Latin American offices — the largest regional cluster. Designing the guidelines for real adoption meant meeting people in the language they work in, not the language the organization happened to use internally.</p>
+    </div>
+  </div>
+
+  <div class="container-wide" style="margin-top:2rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+    <div class="img-block light tall">
+      <span class="img-tag mock-tag">Diagram — if available</span>
+      <div class="img-num">IMAGE 08</div>
+      <div class="img-name">Rollout Map — 17 Countries</div>
+      <div class="img-desc">Simple dots, royal blue, with region labels.</div>
+    </div>
+    <div class="img-block real tall">
+      <span class="img-tag real-tag">Real asset — screenshot</span>
+      <div class="img-num">IMAGE 09</div>
+      <div class="img-name">SharePoint Onboarding Section</div>
+      <div class="img-desc">SharePoint brand onboarding hub</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- REFLECTION -->
+<section>
+  <div class="container">
+    <div class="label">Reflection</div>
+    <h2>The Design Work Was the Straightforward Part.</h2>
+
+    <div class="reflection-block">
+      <p>The harder work was convincing people who didn't think in design terms why the decisions we made were worth making. That meant learning to translate — turning visual rationale into language about mission clarity, donor trust, and organizational coherence. Without that translation, the project wouldn't have moved. The president's sign-off wasn't a formality; it was the product of years of internal advocacy.</p>
+      <p>It also confirmed something I've carried into every project since: a well-designed system fails if the people meant to use it don't feel ownership over it. The physical kits, the live sessions, the president's involvement — those weren't nice extras. They were what made adoption possible. Design that doesn't account for how it gets used after handoff isn't finished design.</p>
+      <p>The uneven compliance in under-resourced regions is the honest limitation I'd address first if the project continued. Designated regional contacts with ready-made templates for common use cases — social posts, event signage, email signatures — would have been more durable than training alone. The system needed a local steward, not just a set of rules.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- NEXT WORK -->
+<section>
+  <div class="container">
+    <div class="label">More work</div>
+    <h2>Next Case Study</h2>
+    <div class="next-work">
+      <a class="next-card" href="mara.html">
+        <div class="next-label">Mobile App · UX / Product</div>
+        <div class="next-name">MARA</div>
+        <div class="next-desc">A marathon training app built from real runner research. Personalized plans, adaptive coaching, and a design system built to scale.</div>
+        <div class="next-arrow">View case study →</div>
+      </a>
+      <a class="next-card" href="laundry.html">
+        <div class="next-label">Service Design · India</div>
+        <div class="next-name">Laundry Point</div>
+        <div class="next-desc">Launching a self-service laundromat in a market where the concept was completely new. Designing for comprehension before designing for use.</div>
+        <div class="next-arrow">View case study →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-name">Alphonse Riang</span>
+  <a class="footer-link" href="index.html">← Back to all work</a>
+</footer>
+
+</body>
+</html>
