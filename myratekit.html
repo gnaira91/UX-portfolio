@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyRateKit — UX Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --coral: #E8694A;
+    --coral-light: #FDF1EE;
+    --coral-mid: #F0A08A;
+    --slate: #64748B;
+    --slate-light: #94A3B8;
+    --dark: #1A1A1A;
+    --mid: #3D3D3D;
+    --border: #E8E4DF;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,105,74,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,105,74,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(250,250,248,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--coral);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--slate);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--coral);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--coral);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--slate);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--slate-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .meta-item span {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  /* SECTION */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  .section-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--coral-mid);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* CARDS GRID */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--coral-mid);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--coral-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .card h3 { margin-bottom: 8px; }
+
+  .card p {
+    font-size: 14px;
+    color: var(--slate);
+    margin-bottom: 0;
+    max-width: 100%;
+  }
+
+  /* QUOTE */
+  .quote-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--coral);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin: 32px 0;
+    max-width: 680px;
+  }
+
+  .quote-block p {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .quote-block cite {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--slate-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* STAT ROW */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 40px 0;
+  }
+
+  .stat {
+    background: var(--white);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--mono);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--coral);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--slate);
+  }
+
+  /* PROCESS TIMELINE */
+  .timeline {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-phase {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--coral);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .timeline-content h3 { margin-bottom: 8px; }
+  .timeline-content p { max-width: 100%; margin-bottom: 0; font-size: 15px; }
+
+  /* PAIN POINTS */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .pain-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .pain-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    background: var(--coral-light);
+    color: var(--coral);
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .pain-item h3 { font-size: 15px; margin-bottom: 6px; }
+  .pain-item p { font-size: 14px; margin-bottom: 0; max-width: 100%; }
+
+  /* DECISION TABLE */
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 14px;
+  }
+
+  .decision-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--slate-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .decision-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--mid);
+    font-weight: 300;
+    vertical-align: top;
+  }
+
+  .decision-table tr:last-child td { border-bottom: none; }
+
+  .decision-table tbody tr {
+    background: var(--white);
+    transition: background 0.15s;
+  }
+
+  .decision-table tbody tr:hover { background: var(--coral-light); }
+
+  .tag-yes {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: #D1FAE5;
+    color: #065F46;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .tag-partial {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: #FEF3C7;
+    color: #92400E;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* TOOLS GRID */
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .tool-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--slate);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tool-pill span {
+    font-size: 15px;
+  }
+
+  /* LEARNINGS */
+  .learnings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .learning {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+
+  .learning-num {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .learning h3 { margin-bottom: 8px; }
+  .learning p { font-size: 14px; margin-bottom: 0; max-width: 100%; }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 16px;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--slate-light);
+    margin: 0;
+    max-width: 100%;
+  }
+
+  footer a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--coral);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    background: var(--coral-light);
+    border: 1px solid #F0C4B4;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    max-width: 680px;
+  }
+
+  .highlight p { margin: 0; color: var(--dark); font-size: 15px; }
+
+  /* FULL WIDTH BAND */
+  .band {
+    background: var(--dark);
+    position: relative;
+    z-index: 1;
+    padding: 80px 48px;
+  }
+
+  .band-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .band h2 {
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .band p {
+    color: #94A3B8;
+    max-width: 560px;
+  }
+
+  .band .section-number { color: #4A4A4A; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 24px; padding-right: 24px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    .band { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Alphonse Riang</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#outcomes">Outcomes</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <div class="hero-tag">UX Case Study · 2026</div>
+  <h1>Helping freelancers charge <em>with confidence</em></h1>
+  <p class="hero-sub">MyRateKit is a free, multi-calculator web toolkit that helps independent workers understand their business numbers — rate, tax, profitability — in one place, without needing an accountant.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <label>Role</label>
+      <span>Product Design & Strategy</span>
+    </div>
+    <div class="meta-item">
+      <label>Timeline</label>
+      <span>4 Weeks · 2026</span>
+    </div>
+    <div class="meta-item">
+      <label>Platform</label>
+      <span>Web · Mobile Responsive</span>
+    </div>
+    <div class="meta-item">
+      <label>Live Product</label>
+      <span><a href="https://myratekit.com" target="_blank" style="color: var(--coral); text-decoration: none;">myratekit.com ↗</a></span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTEXT -->
+<section>
+  <span class="section-number">01 — Context</span>
+  <h2>The problem hiding in plain sight</h2>
+  <p>Freelancing is growing fast. By 2027, an estimated 86.5 million Americans alone will work independently. Yet the most common question in every freelancer community — across Reddit, Facebook groups, and industry forums — remains stubbornly unanswered: <strong>"How much should I charge?"</strong></p>
+  <p>The tools that exist either do too little (a single calculator on someone's blog) or belong to platforms with competing interests (Upwork's rate calculator benefits Upwork, not the freelancer). There was no neutral, beautiful, comprehensive destination built exclusively for this problem.</p>
+
+  <div class="quote-block">
+    <p>"I was getting clients consistently but still couldn't make rent. I had no idea I was undercharging by 40%."</p>
+    <cite>— Common sentiment across r/freelance, r/forhire</cite>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">70%</span>
+      <span class="stat-label">of freelancers undercharge when starting</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">86M</span>
+      <span class="stat-label">projected US freelancers by 2027</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">$6,500</span>
+      <span class="stat-label">extra tax a contractor pays vs employee at same income</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">0</span>
+      <span class="stat-label">well-designed, multi-tool alternatives existed</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <span class="section-number">02 — Research</span>
+  <h2>What freelancers actually struggle with</h2>
+  <p>Research was conducted through community analysis — reading hundreds of posts across r/freelance, r/digitalnomad, r/forhire, and professional Facebook groups. The goal was to identify recurring pain points without survey bias. Five clear themes emerged.</p>
+
+  <div class="pain-grid">
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #1</div>
+      <h3>No baseline to start from</h3>
+      <p>New freelancers have no framework for setting an initial rate. They guess, ask friends, or copy competitors — none of which accounts for their actual cost of living.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #2</div>
+      <h3>Hidden cost of self-employment</h3>
+      <p>Most people transitioning from employment don't know they owe both halves of FICA tax as contractors — discovering a $14,000+ tax bill for the first time is a common horror story.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #3</div>
+      <h3>Can't compare contract vs. job offers</h3>
+      <p>When a recruiter offers $80/hour contract vs. $120K salary, freelancers have no quick way to understand which is actually better after tax and benefits.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #4</div>
+      <h3>Fear of raising rates</h3>
+      <p>Established freelancers keep rates flat for years out of fear. They lack data to justify increases to clients and don't know how much to raise or when.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #5</div>
+      <h3>Project profitability blindness</h3>
+      <p>Freelancers take on projects that feel profitable but aren't — scope creep, underestimated hours, and client revisions erode margins invisibly.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-tag">PAIN #6</div>
+      <h3>US-centric tools only</h3>
+      <p>The UK, Australia, and Canada have large freelance workforces but almost no dedicated tax or rate tools. Freelancers in these markets are entirely underserved.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPETITIVE -->
+<section>
+  <span class="section-number">03 — Competitive Analysis</span>
+  <h2>A crowded space with a clear gap</h2>
+  <p>Existing tools fall into two camps: giant platforms with calculators as afterthoughts, and solo-built minimal tools with no SEO or design investment. Neither serves the user well.</p>
+
+  <table class="decision-table">
+    <thead>
+      <tr>
+        <th>Competitor</th>
+        <th>Type</th>
+        <th>Multi-tool</th>
+        <th>Multi-country</th>
+        <th>Designed for creatives</th>
+        <th>Neutral / independent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Upwork Rate Calculator</strong></td>
+        <td>Platform feature</td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>HubSpot Calculator</strong></td>
+        <td>Lead gen tool</td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>Clockify</strong></td>
+        <td>App feature</td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td><strong>FreelanceHourlyRate.com</strong></td>
+        <td>Solo project</td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-partial">No</span></td>
+        <td><span class="tag-yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td><strong style="color: var(--coral);">MyRateKit</strong></td>
+        <td>Dedicated toolkit</td>
+        <td><span class="tag-yes">Yes — 6 tools</span></td>
+        <td><span class="tag-yes">Yes — 4 countries</span></td>
+        <td><span class="tag-yes">Yes</span></td>
+        <td><span class="tag-yes">Yes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESIGN DECISIONS -->
+<section id="design">
+  <span class="section-number">04 — Design Decisions</span>
+  <h2>Every choice was deliberate</h2>
+  <p>The target audience — designers, developers, copywriters, consultants — has high visual standards and immediately distrusts cluttered or corporate-looking tools. The design needed to signal quality and independence before a single number was entered.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <h3>Clean minimal aesthetic</h3>
+      <p>White space-first design with a single warm coral accent (#E8694A). Inspired by tools creatives already trust — Notion, Linear, Loom. Zero decorative clutter.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⌨️</div>
+      <h3>Monospace output numbers</h3>
+      <p>Result values render in JetBrains Mono while all UI text stays in DM Sans. This deliberate contrast signals "this number is data, not decoration" — like a financial terminal.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h3>Graph paper background</h3>
+      <p>A subtle 48px grid fading at edges creates atmosphere without clutter. Calculators live on graph paper — the visual metaphor reinforces the tool's purpose subliminally.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Live calculation (no submit)</h3>
+      <p>Results update instantly as inputs change. No "Calculate" button. This eliminates friction and creates an immediate feedback loop that builds trust in the tool.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h3>Shareable URL state</h3>
+      <p>Every calculation encodes inputs as URL parameters. Users can bookmark or share their exact calculation — creating a viral loop where every shared link is a new user acquisition.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧩</div>
+      <h3>Progressive disclosure</h3>
+      <p>Essential fields shown immediately, advanced options (expenses, margin) hidden behind a toggle. Reduces form fatigue for casual users without limiting power users.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Visual breakdown chart</h3>
+      <p>A donut chart shows where gross income goes (tax, expenses, take-home) alongside the numbers. Creative audiences understand visuals faster than figures alone.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h3>Multi-country from day one</h3>
+      <p>US, UK, Australia, Canada supported at launch — each with accurate local tax formulas. This quadruples the addressable SEO surface area with minimal additional complexity.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">ⓘ</div>
+      <h3>Contextual tooltips</h3>
+      <p>Every potentially confusing term (net vs. gross, billable days) has an inline tooltip. Eliminates the most common user error — misunderstanding what "income" means in each field.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section id="process">
+  <span class="section-number">05 — Build Process</span>
+  <h2>From idea to live product in weeks</h2>
+  <p>MyRateKit was built as a solo project using an AI-assisted development workflow. The goal was to validate the product concept with real users before investing in custom development infrastructure.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-phase">Week 1</div>
+      <div class="timeline-content">
+        <h3>Research & competitive analysis</h3>
+        <p>Analysed 200+ Reddit posts across r/freelance, r/digitalnomad, and r/forhire to map real pain points. Audited 8 existing tools. Identified the multi-country, multi-tool gap as the core opportunity.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Week 1–2</div>
+      <div class="timeline-content">
+        <h3>Product specification</h3>
+        <p>Defined the full 6-calculator suite with precise formula logic, input/output specifications, tax rates by country, and interaction patterns. Wrote the complete product brief before a single line of code.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Week 2</div>
+      <div class="timeline-content">
+        <h3>AI-assisted build</h3>
+        <p>Built using Lovable (AI app builder) with iterative prompt engineering. The full product specification was used as the primary build prompt. All calculator logic runs client-side in JavaScript — zero backend, zero API costs.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Week 3</div>
+      <div class="timeline-content">
+        <h3>Design refinement</h3>
+        <p>Five design passes: graph paper background, progressive disclosure, tooltip system, donut chart visualisation, monospace number treatment, and icon consistency audit. Each pass was a targeted Lovable prompt.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Week 3–4</div>
+      <div class="timeline-content">
+        <h3>Infrastructure & launch</h3>
+        <p>Domain acquired (myratekit.com via Porkbun), GitHub repository connected, deployed to Vercel with auto-deploy on push. Google Search Console verified and sitemap submitted on launch day.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <h3 style="margin-bottom: 20px;">Tools & Stack</h3>
+    <div class="tools-grid">
+      <div class="tool-pill"><span>🧠</span> Claude (product strategy)</div>
+      <div class="tool-pill"><span>🛠</span> Lovable (AI app builder)</div>
+      <div class="tool-pill"><span>⚡</span> Vercel (hosting)</div>
+      <div class="tool-pill"><span>🐙</span> GitHub (version control)</div>
+      <div class="tool-pill"><span>🔍</span> Google Search Console</div>
+      <div class="tool-pill"><span>🌐</span> Porkbun (domain)</div>
+      <div class="tool-pill"><span>⚛️</span> React + TypeScript</div>
+      <div class="tool-pill"><span>🎨</span> Tailwind CSS</div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="band-inner">
+    <span class="section-number">06 — Key Design Challenges</span>
+    <h2>What was hard</h2>
+    <p>Three problems required the most iteration to solve well.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px;">
+      <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
+        <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Form fatigue on mobile</h3>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">6 inputs on one screen overwhelmed users on small screens. Progressive disclosure — showing 3 essential fields first — reduced perceived complexity without removing functionality.</p>
+      </div>
+      <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
+        <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Net vs. gross confusion</h3>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">The most common misuse was users entering gross salary where net was expected — producing wildly wrong outputs. Contextual tooltips on every income field eliminated this class of error.</p>
+      </div>
+      <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
+        <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Building trust without a brand</h3>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">A new site asking users to trust financial calculations needs to earn credibility instantly. Source citations, disclaimer pages, and restrained professional design do this without requiring a reputation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OUTCOMES -->
+<section id="outcomes">
+  <span class="section-number">07 — Outcomes & Learnings</span>
+  <h2>What this project demonstrated</h2>
+  <p>MyRateKit was designed as both a useful product and a proof of concept — that a solo, non-technical founder can research, design, build, and launch a real web product in weeks using AI-assisted tools, with near-zero infrastructure cost.</p>
+
+  <div class="highlight">
+    <p><strong>Total monthly cost to run:</strong> ~$25/month (Lovable Pro only). Hosting, SSL, analytics, and deployment are all free. The product earns through display advertising and affiliate commissions — both requiring zero ongoing maintenance once configured.</p>
+  </div>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-num">01</div>
+      <h3>Specification before code</h3>
+      <p>Writing a complete product brief — formulas, edge cases, tax rates, copy — before prompting the builder produced dramatically better results than iterating blind. AI tools reward clarity.</p>
+    </div>
+    <div class="learning">
+      <div class="learning-num">02</div>
+      <h3>Niche beats breadth</h3>
+      <p>Competing with generalist calculator sites on broad keywords is impossible for a new domain. Targeting "freelance rate calculator UK designer" instead of "calculator" is how a small site wins SEO.</p>
+    </div>
+    <div class="learning">
+      <div class="learning-num">03</div>
+      <h3>Design is a trust signal</h3>
+      <p>For a financial tool with no established reputation, clean professional design does more trust-building work than any written claim. The creative audience judges tools by how they look before touching them.</p>
+    </div>
+    <div class="learning">
+      <div class="learning-num">04</div>
+      <h3>Community before SEO</h3>
+      <p>Organic search takes 6–12 months to compound. Community platforms (Reddit, IndieHackers) can deliver real users within days of launch — making community the correct first distribution channel.</p>
+    </div>
+    <div class="learning">
+      <div class="learning-num">05</div>
+      <h3>Viral loops in product design</h3>
+      <p>The shareable URL feature and rate card export aren't vanity features — they're the product's word-of-mouth engine. Every shared calculation is a zero-cost acquisition event.</p>
+    </div>
+    <div class="learning">
+      <div class="learning-num">06</div>
+      <h3>Multi-country = 4x surface area</h3>
+      <p>Supporting US, UK, Australia and Canada from day one quadruples SEO opportunities for almost no extra development effort. Most competitors ignore non-US markets entirely.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <p>© 2026 · MyRateKit UX Case Study</p>
+  <a href="https://myratekit.com" target="_blank">Visit myratekit.com ↗</a>
+</footer>
+
+</body>
+</html>
