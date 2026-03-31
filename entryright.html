@@ -53,9 +53,10 @@
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
+    position: static;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,6 +64,8 @@
     background: rgba(250,247,242,0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   .nav-logo {
@@ -577,7 +580,8 @@
 </head>
 <body>
 
-<nav>
+<header style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,247,242,0.88);backdrop-filter:blur(12px);border-bottom:1px solid #E8E4DC;">
+<nav style="position:static;background:transparent;backdrop-filter:none;border:none;">
   <a class="nav-logo" href="index.html">Alphonse Riang</a>
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
@@ -587,12 +591,13 @@
     <li><a href="#outcomes">Outcomes</a></li>
   </ul>
 </nav>
+</header>
 
 <!-- HERO -->
 <div class="hero" id="overview">
   <div class="hero-tag">UX Case Study · 2026</div>
   <h1>Helping nomads stay <em>with confidence</em></h1>
-  <p class="hero-sub">EntryRight is a free, mobile-first visa stay planner that helps digital nomads and remote workers instantly understand how long they can legally stay — and work — in any country, without Googling or guessing.</p>
+  <p class="hero-sub">EntryRight is a free, mobile-first visa stay planner that helps digital nomads and remote workers instantly understand how long they can legally stay and work in any country, without Googling or guessing.</p>
   <div class="hero-meta">
     <div class="meta-item">
       <label>Role</label>
@@ -619,8 +624,8 @@
 <section>
   <span class="section-number">01 — Context</span>
   <h2>The problem hiding in every travel forum</h2>
-  <p>The digital nomad population is growing fast. Millions of remote workers now move between countries regularly — and almost all of them face the same recurring anxiety: <strong>"Am I allowed to be here, working, right now?"</strong></p>
-  <p>The tools that exist either bury the answer in dense government text, give dangerously outdated information from blog posts, or treat the question as a simple lookup when the reality — rolling windows, grey-area remote work laws, visa run calculations — is considerably more nuanced. Nobody had built a clean, calm, trustworthy destination for this exact problem.</p>
+  <p>The digital nomad population is growing fast. Millions of remote workers now move between countries regularly, and almost all of them face the same recurring anxiety: <strong>"Am I allowed to be here, working, right now?"</strong></p>
+  <p>The tools that exist either bury the answer in dense government text, give dangerously outdated information from blog posts, or treat the question as a simple lookup when the reality is considerably more nuanced: rolling windows, grey-area remote work laws, visa run calculations. Nobody had built a clean, calm, trustworthy destination for this exact problem.</p>
 
   <div class="quote-block">
     <p>"I overstayed my Schengen allowance without even realising it. I didn't understand the 90/180 rolling window. It cost me €500 and a border interrogation."</p>
@@ -653,7 +658,7 @@
 <section id="research">
   <span class="section-number">02 — Research</span>
   <h2>What nomads actually worry about</h2>
-  <p>Research was conducted through community analysis — reading hundreds of posts across r/digitalnomad, r/solotravel, r/ExpatFIRE, and nomad-specific Facebook groups. The goal was to identify recurring anxiety points without survey bias. Five clear themes emerged.</p>
+  <p>Research was conducted through community analysis: reading hundreds of posts across r/digitalnomad, r/solotravel, r/ExpatFIRE, and nomad-specific Facebook groups. The goal was to identify recurring anxiety points without survey bias. Five clear themes emerged.</p>
 
   <div class="pain-grid">
     <div class="pain-item">
@@ -669,7 +674,7 @@
     <div class="pain-item">
       <div class="pain-tag">PAIN #3</div>
       <h3>Government sites are unusable</h3>
-      <p>Every official embassy website is a different format, different language, different structure. Finding the one relevant fact takes 20 minutes — if you can find it at all.</p>
+      <p>Every official embassy website is a different format, different language, different structure. Finding the one relevant fact takes 20 minutes, if you can find it at all.</p>
     </div>
     <div class="pain-item">
       <div class="pain-tag">PAIN #4</div>
@@ -684,7 +689,7 @@
     <div class="pain-item">
       <div class="pain-tag">PAIN #6</div>
       <h3>Visa option costs are hard to compare</h3>
-      <p>When a tourist visa and a digital nomad visa both exist for the same country, nomads struggle to understand the tradeoff — cost vs. duration vs. remote work legality.</p>
+      <p>When a tourist visa and a digital nomad visa both exist for the same country, nomads struggle to understand the tradeoff between cost, duration, and remote work legality.</p>
     </div>
   </div>
 </section>
@@ -744,10 +749,10 @@
       <tr>
         <td><strong style="color: var(--teal);">EntryRight</strong></td>
         <td>Dedicated planner</td>
-        <td><span class="tag-yes">Yes — nuanced</span></td>
-        <td><span class="tag-yes">Yes — dynamic</span></td>
-        <td><span class="tag-yes">Yes — every result</span></td>
-        <td><span class="tag-yes">Yes — by design</span></td>
+        <td><span class="tag-yes">Yes, nuanced</span></td>
+        <td><span class="tag-yes">Yes, dynamic</span></td>
+        <td><span class="tag-yes">Yes, every result</span></td>
+        <td><span class="tag-yes">Yes, by design</span></td>
       </tr>
     </tbody>
   </table>
@@ -765,22 +770,22 @@
     <div class="card">
       <div class="card-icon">🌿</div>
       <h3>Warm sand and teal palette</h3>
-      <p>Deliberately avoids cold institutional blues that signal bureaucracy. Warm cream (#FAF7F2) with teal accents creates calm authority — like a knowledgeable friend, not a government portal.</p>
+      <p>Deliberately avoids cold institutional blues that signal bureaucracy. Warm cream (#FAF7F2) with teal accents creates calm authority, like a knowledgeable friend rather than a government portal.</p>
     </div>
     <div class="card">
       <div class="card-icon">✅</div>
       <h3>Status pill as the hero element</h3>
-      <p>"Visa-free entry confirmed" is the most anxiety-relieving piece of information on the page. It surfaces as the dominant visual element on results — users see their answer before anything else.</p>
+      <p>"Visa-free entry confirmed" is the most anxiety-relieving piece of information on the page. It surfaces as the dominant visual element on results, so users see their answer before anything else.</p>
     </div>
     <div class="card">
       <div class="card-icon">📐</div>
       <h3>Three inputs, not ten</h3>
-      <p>The form asks only: passport, destination, arrival date. Complexity is surfaced progressively on the results screen — not upfront where it creates form fatigue and drop-off.</p>
+      <p>The form asks only: passport, destination, arrival date. Complexity is surfaced progressively on the results screen rather than upfront where it creates form fatigue.</p>
     </div>
     <div class="card">
       <div class="card-icon">⚠️</div>
       <h3>Grey area as a design element</h3>
-      <p>Remote work legality isn't binary — "allowed / not allowed" would be dishonest. The amber "grey area legally" treatment with a warning icon communicates nuance without paralysing the user.</p>
+      <p>Remote work legality isn't binary. "Allowed / not allowed" would be dishonest. The amber "grey area legally" treatment with a warning icon communicates nuance without paralysing the user.</p>
     </div>
     <div class="card">
       <div class="card-icon">📊</div>
@@ -800,7 +805,7 @@
     <div class="card">
       <div class="card-icon">💱</div>
       <h3>Currency selector in navigation</h3>
-      <p>Rather than a buried currency converter card, a single persistent USD/GBP/EUR/CAD/AUD selector in the nav bar updates all cost figures globally — following the Google Flights pattern users already trust.</p>
+      <p>Rather than a buried currency converter card, a single persistent USD/GBP/EUR/CAD/AUD selector in the nav bar updates all cost figures globally, following the Google Flights pattern users already trust.</p>
     </div>
     <div class="card">
       <div class="card-icon">📱</div>
@@ -837,7 +842,7 @@
       <div class="timeline-phase">Week 2</div>
       <div class="timeline-content">
         <h3>AI-assisted build</h3>
-        <p>Built using Lovable (AI app builder) with structured prompt engineering across 5 defined phases: landing page, results screen, data layer wiring, icon system, mobile optimisation. All logic runs client-side — zero backend, zero API costs at v1.</p>
+        <p>Built using Lovable (AI app builder) with structured prompt engineering across 5 defined phases: landing page, results screen, data layer wiring, icon system, mobile optimisation. All logic runs client-side, with zero backend and zero API costs at v1.</p>
       </div>
     </div>
     <div class="timeline-item">
@@ -880,11 +885,11 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px;">
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Trust without a reputation</h3>
-        <p style="color: #64748B; font-size: 14px; max-width: 100%;">A new site asking users to trust visa information — with real legal consequences if wrong — needs to earn credibility instantly. Official source citations, last-verified timestamps, and restrained professional design do this without requiring an established brand.</p>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">A new site asking users to trust visa information, with real legal consequences if wrong, needs to earn credibility instantly. Official source citations, last-verified timestamps, and restrained professional design do this without requiring an established brand.</p>
       </div>
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Designing for anxiety</h3>
-        <p style="color: #64748B; font-size: 14px; max-width: 100%;">Most UX is designed for delight-driven use cases. This product is used when people are stressed about their legal status. Every visual and content decision had to reduce anxiety, not add to it — a fundamentally different design constraint.</p>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">Most UX is designed for delight-driven use cases. This product is used when people are stressed about their legal status. Every visual and content decision had to reduce anxiety rather than add to it, which is a fundamentally different design constraint.</p>
       </div>
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Communicating legal nuance clearly</h3>
@@ -898,22 +903,27 @@
 <section id="outcomes">
   <span class="section-number">07 — Outcomes & Learnings</span>
   <h2>What this project demonstrated</h2>
-  <p>EntryRight was designed as both a useful product and a proof of concept — that a solo, non-technical founder can research, design, build and launch a real web product in weeks using AI-assisted tools, with near-zero infrastructure cost.</p>
+  <p>EntryRight was designed as both a useful product and a proof of concept. A solo, non-technical founder can research, design, build and launch a real web product in weeks using AI-assisted tools, with near-zero infrastructure cost.</p>
 
   <div class="highlight">
-    <p><strong>Total monthly cost to run:</strong> ~$25/month (Lovable Pro only). Hosting, SSL, analytics and deployment are all free. Revenue roadmap includes affiliate partnerships with travel insurance providers, VPN services and SIM card companies — all products nomads buy anyway.</p>
+    <p><strong>Total monthly cost to run:</strong> ~$25/month (Lovable Pro only). Hosting, SSL, analytics and deployment are all free. Revenue roadmap includes affiliate partnerships with travel insurance providers, VPN services and SIM card companies, all products nomads buy anyway.</p>
   </div>
+
+  <h3 style="margin-top:2rem; margin-bottom:0.75rem;">Early user signals</h3>
+  <p>EntryRight is in active testing. The most consistent early signal is geographic: users outside the currently supported markets want their country included. That response confirms the core gap the tool was built to address and sets the priority for the next build phase.</p>
+  <p>A developer user flagged a parameter handling edge case causing crashes under certain input combinations. Being caught early by a technically literate user before it reached a wider audience is exactly what a soft launch is for. It is being resolved.</p>
+  <p style="color:#9e9993; font-size:0.875rem; font-style:italic;">Structured user testing in progress. Findings will be documented here as they come in.</p>
 
   <div class="learnings">
     <div class="learning">
       <div class="learning-num">01</div>
       <h3>Emotion before information</h3>
-      <p>The most impactful design decision was placing the visa status pill — "Visa-free entry confirmed" — as the visual hero of the results screen. Users see their answer before processing any data. Anxiety-first design demands answer-first hierarchy.</p>
+      <p>The most impactful design decision was placing the visa status pill, "Visa-free entry confirmed", as the visual hero of the results screen. Users see their answer before processing any data. Anxiety-first design demands answer-first hierarchy.</p>
     </div>
     <div class="learning">
       <div class="learning-num">02</div>
       <h3>Specification before code</h3>
-      <p>Writing a complete product brief — data structures, edge cases, country rules, copy — before prompting the builder produced dramatically better results than iterating blind. AI tools reward clarity and specificity.</p>
+      <p>Writing a complete product brief, covering data structures, edge cases, country rules, and copy, before prompting the builder produced dramatically better results than iterating blind. AI tools reward clarity and specificity.</p>
     </div>
     <div class="learning">
       <div class="learning-num">03</div>
@@ -923,7 +933,7 @@
     <div class="learning">
       <div class="learning-num">04</div>
       <h3>Batch your prompts</h3>
-      <p>Combining multiple small fixes into single structured prompts — rather than sending one change at a time — saved approximately 30% of available AI credits while producing more consistent results across screens.</p>
+      <p>Combining multiple small fixes into single structured prompts rather than sending one change at a time saved approximately 30% of available AI credits while producing more consistent results across screens.</p>
     </div>
     <div class="learning">
       <div class="learning-num">05</div>
@@ -933,7 +943,7 @@
     <div class="learning">
       <div class="learning-num">06</div>
       <h3>Disclaim by design, not footnote</h3>
-      <p>Legal disclaimers placed visibly in the results flow — not buried in a footer — protect the product legally while reinforcing trustworthiness. Transparency is a feature, not a legal afterthought.</p>
+      <p>Legal disclaimers placed visibly in the results flow rather than buried in a footer protect the product legally while reinforcing trustworthiness. Transparency is a feature, not a legal afterthought.</p>
     </div>
   </div>
 </section>

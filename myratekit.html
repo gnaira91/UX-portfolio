@@ -52,11 +52,10 @@
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    position: static;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,6 +63,8 @@
     background: rgba(250,250,248,0.85);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   .nav-logo {
@@ -589,7 +590,8 @@
 </head>
 <body>
 
-<nav>
+<header style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #E8E4DC;">
+<nav style="position:static;background:transparent;backdrop-filter:none;border:none;">
   <a class="nav-logo" href="index.html">Alphonse Riang</a>
   <ul class="nav-links">
     <li><a href="#overview">Overview</a></li>
@@ -599,12 +601,13 @@
     <li><a href="#outcomes">Outcomes</a></li>
   </ul>
 </nav>
+</header>
 
 <!-- HERO -->
 <div class="hero" id="overview">
   <div class="hero-tag">UX Case Study · 2026</div>
   <h1>Helping freelancers charge <em>with confidence</em></h1>
-  <p class="hero-sub">MyRateKit is a free, multi-calculator web toolkit that helps independent workers understand their business numbers — rate, tax, profitability — in one place, without needing an accountant.</p>
+  <p class="hero-sub">MyRateKit is a free, multi-calculator web toolkit that helps independent workers understand their business numbers: rate, tax, and profitability, in one place, without needing an accountant.</p>
   <div class="hero-meta">
     <div class="meta-item">
       <label>Role</label>
@@ -631,7 +634,7 @@
 <section>
   <span class="section-number">01 — Context</span>
   <h2>The problem hiding in plain sight</h2>
-  <p>Freelancing is growing fast. By 2027, an estimated 86.5 million Americans alone will work independently. Yet the most common question in every freelancer community — across Reddit, Facebook groups, and industry forums — remains stubbornly unanswered: <strong>"How much should I charge?"</strong></p>
+  <p>Freelancing is growing fast. By 2027, an estimated 86.5 million Americans alone will work independently. Yet the most common question in every freelancer community, across Reddit, Facebook groups, and industry forums, remains stubbornly unanswered: <strong>"How much should I charge?"</strong></p>
   <p>The tools that exist either do too little (a single calculator on someone's blog) or belong to platforms with competing interests (Upwork's rate calculator benefits Upwork, not the freelancer). There was no neutral, beautiful, comprehensive destination built exclusively for this problem.</p>
 
   <div class="quote-block">
@@ -665,18 +668,18 @@
 <section id="research">
   <span class="section-number">02 — Research</span>
   <h2>What freelancers actually struggle with</h2>
-  <p>Research was conducted through community analysis — reading hundreds of posts across r/freelance, r/digitalnomad, r/forhire, and professional Facebook groups. The goal was to identify recurring pain points without survey bias. Five clear themes emerged.</p>
+  <p>Research was conducted through community analysis: reading hundreds of posts across r/freelance, r/digitalnomad, r/forhire, and professional Facebook groups. The goal was to identify recurring pain points without survey bias. Five clear themes emerged.</p>
 
   <div class="pain-grid">
     <div class="pain-item">
       <div class="pain-tag">PAIN #1</div>
       <h3>No baseline to start from</h3>
-      <p>New freelancers have no framework for setting an initial rate. They guess, ask friends, or copy competitors — none of which accounts for their actual cost of living.</p>
+      <p>New freelancers have no framework for setting an initial rate. They guess, ask friends, or copy competitors. None of which accounts for their actual cost of living.</p>
     </div>
     <div class="pain-item">
       <div class="pain-tag">PAIN #2</div>
       <h3>Hidden cost of self-employment</h3>
-      <p>Most people transitioning from employment don't know they owe both halves of FICA tax as contractors — discovering a $14,000+ tax bill for the first time is a common horror story.</p>
+      <p>Most people transitioning from employment don't know they owe both halves of FICA tax as contractors. Discovering a $14,000+ tax bill for the first time is a common horror story.</p>
     </div>
     <div class="pain-item">
       <div class="pain-tag">PAIN #3</div>
@@ -691,7 +694,7 @@
     <div class="pain-item">
       <div class="pain-tag">PAIN #5</div>
       <h3>Project profitability blindness</h3>
-      <p>Freelancers take on projects that feel profitable but aren't — scope creep, underestimated hours, and client revisions erode margins invisibly.</p>
+      <p>Freelancers take on projects that feel profitable but aren't. Scope creep, underestimated hours, and client revisions erode margins invisibly.</p>
     </div>
     <div class="pain-item">
       <div class="pain-tag">PAIN #6</div>
@@ -756,8 +759,8 @@
       <tr>
         <td><strong style="color: var(--coral);">MyRateKit</strong></td>
         <td>Dedicated toolkit</td>
-        <td><span class="tag-yes">Yes — 6 tools</span></td>
-        <td><span class="tag-yes">Yes — 4 countries</span></td>
+        <td><span class="tag-yes">Yes, 6 tools</span></td>
+        <td><span class="tag-yes">Yes, 4 countries</span></td>
         <td><span class="tag-yes">Yes</span></td>
         <td><span class="tag-yes">Yes</span></td>
       </tr>
@@ -771,23 +774,23 @@
 <section id="design">
   <span class="section-number">04 — Design Decisions</span>
   <h2>Every choice was deliberate</h2>
-  <p>The target audience — designers, developers, copywriters, consultants — has high visual standards and immediately distrusts cluttered or corporate-looking tools. The design needed to signal quality and independence before a single number was entered.</p>
+  <p>The target audience, designers, developers, copywriters, and consultants, has high visual standards and immediately distrusts cluttered or corporate-looking tools. The design needed to signal quality and independence before a single number was entered.</p>
 
   <div class="cards">
     <div class="card">
       <div class="card-icon">🎨</div>
       <h3>Clean minimal aesthetic</h3>
-      <p>White space-first design with a single warm coral accent (#E8694A). Inspired by tools creatives already trust — Notion, Linear, Loom. Zero decorative clutter.</p>
+      <p>White space-first design with a single warm coral accent (#E8694A). Inspired by tools creatives already trust: Notion, Linear, Loom. Zero decorative clutter.</p>
     </div>
     <div class="card">
       <div class="card-icon">⌨️</div>
       <h3>Monospace output numbers</h3>
-      <p>Result values render in JetBrains Mono while all UI text stays in DM Sans. This deliberate contrast signals "this number is data, not decoration" — like a financial terminal.</p>
+      <p>Result values render in JetBrains Mono while all UI text stays in DM Sans. This deliberate contrast signals "this number is data, not decoration", like a financial terminal.</p>
     </div>
     <div class="card">
       <div class="card-icon">📐</div>
       <h3>Graph paper background</h3>
-      <p>A subtle 48px grid fading at edges creates atmosphere without clutter. Calculators live on graph paper — the visual metaphor reinforces the tool's purpose subliminally.</p>
+      <p>A subtle 48px grid fading at edges creates atmosphere without clutter. Calculators live on graph paper, and the visual metaphor reinforces the tool's purpose subliminally.</p>
     </div>
     <div class="card">
       <div class="card-icon">⚡</div>
@@ -797,7 +800,7 @@
     <div class="card">
       <div class="card-icon">🔗</div>
       <h3>Shareable URL state</h3>
-      <p>Every calculation encodes inputs as URL parameters. Users can bookmark or share their exact calculation — creating a viral loop where every shared link is a new user acquisition.</p>
+      <p>Every calculation encodes inputs as URL parameters. Users can bookmark or share their exact calculation, creating a viral loop where every shared link is a new user acquisition.</p>
     </div>
     <div class="card">
       <div class="card-icon">🧩</div>
@@ -812,12 +815,12 @@
     <div class="card">
       <div class="card-icon">🌍</div>
       <h3>Multi-country from day one</h3>
-      <p>US, UK, Australia, Canada supported at launch — each with accurate local tax formulas. This quadruples the addressable SEO surface area with minimal additional complexity.</p>
+      <p>US, UK, Australia, Canada supported at launch, each with accurate local tax formulas. This quadruples the addressable SEO surface area with minimal additional complexity.</p>
     </div>
     <div class="card">
       <div class="card-icon">ⓘ</div>
       <h3>Contextual tooltips</h3>
-      <p>Every potentially confusing term (net vs. gross, billable days) has an inline tooltip. Eliminates the most common user error — misunderstanding what "income" means in each field.</p>
+      <p>Every potentially confusing term (net vs. gross, billable days) has an inline tooltip. Eliminates the most common user error: misunderstanding what "income" means in each field.</p>
     </div>
   </div>
 </section>
@@ -849,7 +852,7 @@
       <div class="timeline-phase">Week 2</div>
       <div class="timeline-content">
         <h3>AI-assisted build</h3>
-        <p>Built using Lovable (AI app builder) with iterative prompt engineering. The full product specification was used as the primary build prompt. All calculator logic runs client-side in JavaScript — zero backend, zero API costs.</p>
+        <p>Built using Lovable (AI app builder) with iterative prompt engineering. The full product specification was used as the primary build prompt. All calculator logic runs client-side in JavaScript, with zero backend and zero API costs.</p>
       </div>
     </div>
     <div class="timeline-item">
@@ -892,11 +895,11 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px;">
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Form fatigue on mobile</h3>
-        <p style="color: #64748B; font-size: 14px; max-width: 100%;">6 inputs on one screen overwhelmed users on small screens. Progressive disclosure — showing 3 essential fields first — reduced perceived complexity without removing functionality.</p>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">6 inputs on one screen overwhelmed users on small screens. Progressive disclosure, showing 3 essential fields first, reduced perceived complexity without removing functionality.</p>
       </div>
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Net vs. gross confusion</h3>
-        <p style="color: #64748B; font-size: 14px; max-width: 100%;">The most common misuse was users entering gross salary where net was expected — producing wildly wrong outputs. Contextual tooltips on every income field eliminated this class of error.</p>
+        <p style="color: #64748B; font-size: 14px; max-width: 100%;">The most common misuse was users entering gross salary where net was expected, producing wildly wrong outputs. Contextual tooltips on every income field eliminated this class of error.</p>
       </div>
       <div style="border-top: 1px solid #2D2D2D; padding-top: 24px;">
         <h3 style="color: white; margin-bottom: 12px; font-size: 15px;">Building trust without a brand</h3>
@@ -910,17 +913,22 @@
 <section id="outcomes">
   <span class="section-number">07 — Outcomes & Learnings</span>
   <h2>What this project demonstrated</h2>
-  <p>MyRateKit was designed as both a useful product and a proof of concept — that a solo, non-technical founder can research, design, build, and launch a real web product in weeks using AI-assisted tools, with near-zero infrastructure cost.</p>
+  <p>MyRateKit was designed as both a useful product and a proof of concept. A solo, non-technical founder can research, design, build, and launch a real web product in weeks using AI-assisted tools, with near-zero infrastructure cost.</p>
 
   <div class="highlight">
-    <p><strong>Total monthly cost to run:</strong> ~$25/month (Lovable Pro only). Hosting, SSL, analytics, and deployment are all free. The product earns through display advertising and affiliate commissions — both requiring zero ongoing maintenance once configured.</p>
+    <p><strong>Total monthly cost to run:</strong> ~$25/month (Lovable Pro only). Hosting, SSL, analytics, and deployment are all free. The product earns through display advertising and affiliate commissions, both requiring zero ongoing maintenance once configured.</p>
   </div>
+
+  <h3 style="margin-top:2rem; margin-bottom:0.75rem;">Early user signals</h3>
+  <p>Both MyRateKit and EntryRight are in active testing. The most consistent early signal across both products is geographic: users outside the currently supported markets want their country included. That response confirms the core gap the tools were built to address and sets the priority for the next build phase.</p>
+  <p>A developer user flagged a parameter handling edge case that caused crashes under certain input combinations. Being caught early by a technically literate user before it reached a wider audience is exactly what a soft launch is for. It is being resolved.</p>
+  <p style="color:#9e9993; font-size:0.875rem; font-style:italic;">Structured user testing in progress. Findings will be documented here as they come in.</p>
 
   <div class="learnings">
     <div class="learning">
       <div class="learning-num">01</div>
       <h3>Specification before code</h3>
-      <p>Writing a complete product brief — formulas, edge cases, tax rates, copy — before prompting the builder produced dramatically better results than iterating blind. AI tools reward clarity.</p>
+      <p>Writing a complete product brief, covering formulas, edge cases, tax rates, and copy, before prompting the builder produced dramatically better results than iterating blind. AI tools reward clarity.</p>
     </div>
     <div class="learning">
       <div class="learning-num">02</div>
@@ -935,12 +943,12 @@
     <div class="learning">
       <div class="learning-num">04</div>
       <h3>Community before SEO</h3>
-      <p>Organic search takes 6–12 months to compound. Community platforms (Reddit, IndieHackers) can deliver real users within days of launch — making community the correct first distribution channel.</p>
+      <p>Organic search takes 6–12 months to compound. Community platforms (Reddit, IndieHackers) can deliver real users within days of launch, making community the correct first distribution channel.</p>
     </div>
     <div class="learning">
       <div class="learning-num">05</div>
       <h3>Viral loops in product design</h3>
-      <p>The shareable URL feature and rate card export aren't vanity features — they're the product's word-of-mouth engine. Every shared calculation is a zero-cost acquisition event.</p>
+      <p>The shareable URL feature and rate card export aren't vanity features. They are the product's word-of-mouth engine. Every shared calculation is a zero-cost acquisition event.</p>
     </div>
     <div class="learning">
       <div class="learning-num">06</div>
